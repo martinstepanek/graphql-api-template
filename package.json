@@ -1,0 +1,47 @@
+{
+  "name": "hunting-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "nodemon",
+    "migration": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js",
+    "lint": "eslint --fix src/**/*.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/graphql": "^14.2.2",
+    "bufferutil": "^4.0.1",
+    "class-validator": "^0.9.1",
+    "graphql": "^14.4.2",
+    "graphql-yoga": "^1.18.1",
+    "mysql": "^2.17.1",
+    "nodemon": "^1.19.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.3.0",
+    "type-graphql": "^0.17.4",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.18",
+    "utf-8-validate": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "@typescript-eslint/eslint-plugin": "^1.12.0",
+    "@typescript-eslint/parser": "^1.12.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2",
+    "typeorm-typedi-extensions": "^0.2.3",
+    "typescript": "^3.5.3"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "printWidth": 120,
+    "singleQuote": true
+  }
+}

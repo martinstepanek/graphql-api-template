@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api:
+    image: node:11.15.0
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    working_dir: "/app"
+    volumes:
+      - ./:/app
+    command: "npm run serve"
+  mysql:
+    image: mysql:5.7
+    restart: unless-stopped
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+          MYSQL_ROOT_PASSWORD: root
+  pma:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+    ports:
+      - "8080:80"
+volumes:
+  mysql: ~
+
+
+# docker-compose exec api /bin/bash
