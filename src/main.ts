@@ -1,8 +1,10 @@
 import { GraphQLServer } from 'graphql-yoga';
 import { buildSchema } from 'type-graphql';
-import { AssociationResolver } from './resolvers/AssociationResolver';
 import { Container } from 'typedi';
 import * as TypeORM from 'typeorm';
+import { UserResolver } from './models/user/UserResolver';
+import { contextFactory } from './bootstrap/contextFactory';
+import { authChecker } from './bootstrap/authChecker';
 
 /**
  * Bootstrapping function
@@ -13,15 +15,16 @@ async function bootstrap(): Promise<void> {
     await TypeORM.createConnection();
 
     const schema = await buildSchema({
-        resolvers: [AssociationResolver],
-
+        resolvers: [UserResolver],
         container: Container,
+        authChecker,
     });
 
     const server = new GraphQLServer({
         schema,
+        context: contextFactory,
     });
-    server.start(() => console.log(`Server is running on http://localhost:4000`));
+    await server.start((): void => console.log(`Server is running on http://localhost:4000`));
 }
 
 bootstrap();
