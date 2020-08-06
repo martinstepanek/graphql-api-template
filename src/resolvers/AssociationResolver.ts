@@ -45,7 +45,7 @@ export class AssociationResolver {
         associationInput.adminEmails = adminEmailsInput;
         associationInput.huntingGround = huntingGroundInput;
 
-        let association = this.associationRepository.create(associationInput);
+        const association = this.associationRepository.create(associationInput);
         await this.associationRepository.save(association);
         return this.associationRepository.findOne(association.associationId);
     }
