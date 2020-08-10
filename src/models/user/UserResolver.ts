@@ -5,6 +5,7 @@ import { UserRepository } from './UserRepository';
 import { User } from './User';
 import { AuthService } from './AuthService';
 import { UserInput } from './UserInput';
+import { NotFoundError } from '../../errors/NotFoundError';
 
 @Resolver(User)
 export class UserResolver {
@@ -18,7 +19,7 @@ export class UserResolver {
     public async user(@Arg('userId') userId: string): Promise<User> {
         const model = await this.userRepository.findOne(userId);
         if (model === undefined) {
-            // throw not found error
+            throw new NotFoundError();
         }
         return model;
     }
