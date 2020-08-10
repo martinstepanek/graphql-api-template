@@ -1,17 +1,16 @@
-import { GraphQLServer, Options } from 'graphql-yoga';
 import { buildSchema } from 'type-graphql';
 import { Container } from 'typedi';
 import * as TypeORM from 'typeorm';
 import { UserResolver } from './models/user/UserResolver';
 import { contextFactory } from './bootstrap/contextFactory';
 import { authChecker } from './bootstrap/authChecker';
-import { Server as HttpServer } from 'http';
+import { ApolloServer } from 'apollo-server';
 import { errorFormatter } from './bootstrap/errorFormatter';
 
 /**
  * Bootstrapping function
  */
-async function bootstrap(): Promise<HttpServer> {
+async function bootstrap(): Promise<void> {
     TypeORM.useContainer(Container);
 
     await TypeORM.createConnection();
@@ -22,17 +21,15 @@ async function bootstrap(): Promise<HttpServer> {
         authChecker,
     });
 
-    const server = new GraphQLServer({
+    const server = new ApolloServer({
         schema,
         context: contextFactory,
+        formatError: errorFormatter,
     });
 
-    const options: Options = {
-        formatError: errorFormatter,
-        tracing: { mode: 'enabled' },
-    };
-
-    return server.start(options, ({ endpoint, port }): void => console.log(`Server is running on ${endpoint}:${port}`));
+    server.listen().then(({ url }) => {
+        console.log(`Server ready at ${url}`);
+    });
 }
 
 bootstrap();

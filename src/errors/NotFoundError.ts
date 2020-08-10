@@ -1,7 +1,9 @@
-import { createError } from 'apollo-errors';
+import { ApolloError } from 'apollo-server';
 
-const NotFoundError = createError('NotFoundError', {
-    message: 'Entity not found',
-});
+class NotFoundError extends ApolloError {
+    public constructor() {
+        super('Entity not found', 'NOT_FOUND');
+    }
+}
 
 export { NotFoundError };

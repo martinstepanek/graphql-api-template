@@ -1,6 +1,7 @@
 import { Service } from 'typedi';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 import config from '../../config';
+import { AuthenticationError } from 'apollo-server';
 
 @Service('AuthService')
 export class AuthService {
@@ -11,10 +12,14 @@ export class AuthService {
     }
 
     public async verifyTokenId(tokenId: string): Promise<TokenPayload> {
-        const ticket = await this.googleAuthClient.verifyIdToken({
-            idToken: tokenId,
-        });
-        return ticket.getPayload();
+        try {
+            const ticket = await this.googleAuthClient.verifyIdToken({
+                idToken: tokenId,
+            });
+            return ticket.getPayload();
+        } catch (e) {
+            throw new AuthenticationError('Invalid token');
+        }
     }
 
     public generateAccessToken(): string {

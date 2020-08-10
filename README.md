@@ -30,10 +30,9 @@ npm i & docker-compose up -d
 - `<Type>` - GraphQL model (model that goes out from API) and Entity database model at once
 
 ## Important Libraries 
-- [GrapQL Joga](https://github.com/prisma/graphql-yoga) - Provide GraphQL server (express + apollo), GraphQL tools, GraphQL subscriptions and GraphQL playground
+- [Apollo Server](https://github.com/apollographql/apollo-server) - GraphQl server
 - [TypeGraphQL](https://typegraphql.ml/) - Layer for generation GraphQL schema from TypeScript
 - [Type ORM](https://typeorm.io) - Database layer (supports MySQL, MariaDB, PostgreSQL, CockroachDB, SQLite, MSSQL, Oracle and MongoDB)
-- [Apollo Errors](https://github.com/boltsource/apollo-errors) - Provides better error handling / custom machine-readable errors
 - [Class Validator](https://github.com/typestack/class-validator) - Provides decorators for validating class properties
 - [TS Node](https://github.com/TypeStrong/ts-node) - TypeScript executor for Node
 - [EsLint](https://eslint.org/) - Checking/Fixing code quality/standard tool

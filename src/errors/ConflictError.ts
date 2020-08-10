@@ -1,7 +1,9 @@
-import { createError } from 'apollo-errors';
+import { ApolloError } from 'apollo-server';
 
-const ConflictError = createError('ConflictError', {
-    message: 'Conflict',
-});
+class ConflictError extends ApolloError {
+    public constructor() {
+        super('Conflict', 'CONFLICT');
+    }
+}
 
 export { ConflictError };

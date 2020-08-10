@@ -1,9 +1,8 @@
-import { formatError } from 'apollo-errors';
-import { UnauthorizedError } from '../errors/UnauthorizedError';
+import { AuthenticationError } from 'apollo-server';
 
-export const errorFormatter = (error, ...rest) => {
+export const errorFormatter = error => {
     if (error.originalError.message.startsWith('Access denied')) {
-        return formatError({ ...error, originalError: new UnauthorizedError() }, ...rest);
+        return new AuthenticationError('User not logged in');
     }
-    return formatError(error, ...rest);
+    return error;
 };
