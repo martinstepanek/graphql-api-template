@@ -14,21 +14,27 @@ import createMetricsPlugin from 'apollo-metrics';
  * Bootstrapping function
  */
 async function bootstrap(): Promise<void> {
+    // Type di with type ORM
     TypeORM.useContainer(Container);
 
+    // Database connection
     await TypeORM.createConnection();
 
+    // Building scheme with type-graphql
     const schema = await buildSchema({
         resolvers: [UserResolver],
         container: Container,
         authChecker,
     });
 
+    // Express app
     const app = express();
 
+    // Setup /metrics endpoint for prometheus
     app.get('/metrics', (_, res) => res.send(registerPrometheusClient.metrics()));
     const apolloMetricsPlugin = createMetricsPlugin(registerPrometheusClient);
 
+    // Apollo server
     const server = new ApolloServer({
         schema,
         context: contextFactory,
