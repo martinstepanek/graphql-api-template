@@ -1,4 +1,4 @@
-import { ApolloError } from 'apollo-server';
+import { ApolloError } from 'apollo-server-express';
 
 class NotFoundError extends ApolloError {
     public constructor() {

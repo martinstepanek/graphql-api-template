@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 import config from '../../config';
-import { AuthenticationError } from 'apollo-server';
+import { AuthenticationError } from 'apollo-server-express';
 
 @Service('AuthService')
 export class AuthService {

@@ -1,4 +1,4 @@
-import { AuthenticationError } from 'apollo-server';
+import { AuthenticationError } from 'apollo-server-express';
 
 export const errorFormatter = error => {
     if (error.originalError.message.startsWith('Access denied')) {

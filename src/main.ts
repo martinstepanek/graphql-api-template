@@ -4,8 +4,11 @@ import * as TypeORM from 'typeorm';
 import { UserResolver } from './models/user/UserResolver';
 import { contextFactory } from './bootstrap/contextFactory';
 import { authChecker } from './bootstrap/authChecker';
-import { ApolloServer } from 'apollo-server';
 import { errorFormatter } from './bootstrap/errorFormatter';
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import { register as registerPrometheusClient } from 'prom-client';
+import createMetricsPlugin from 'apollo-metrics';
 
 /**
  * Bootstrapping function
@@ -21,14 +24,24 @@ async function bootstrap(): Promise<void> {
         authChecker,
     });
 
+    const app = express();
+
+    app.get('/metrics', (_, res) => res.send(registerPrometheusClient.metrics()));
+    const apolloMetricsPlugin = createMetricsPlugin(registerPrometheusClient);
+
     const server = new ApolloServer({
         schema,
         context: contextFactory,
         formatError: errorFormatter,
+        // @ts-ignore
+        plugins: [apolloMetricsPlugin],
+        tracing: true,
     });
 
-    server.listen().then(({ url }) => {
-        console.log(`Server ready at ${url}`);
+    server.applyMiddleware({ app });
+
+    app.listen({ port: 4000 }, () => {
+        console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
     });
 }
 
