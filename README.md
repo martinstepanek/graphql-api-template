@@ -1,4 +1,4 @@
-## Deploy
+## Serve API
 ```
 npm i & docker-compose up -d
 ```
@@ -17,10 +17,10 @@ npm i & docker-compose up -d
 - `.eslintrc` - For eslint
 
 ## Directories in `./src`
-- `mirgrations` - Contains all (non-)generated migrations
-- `models` - Contains GraphQL/Entity models, Input models and Args models
-- `resolvers` - Contains all resolvers
-- `services` - Contains all services
+- `bootstrap` - Contains functions for API bootstraping
+- `errors` - Contains basic GraphQl errors
+- `migrations` - Contains all (non-)generated migrations
+- `models` - Contains GraphQL/Entity models, Repositories, Resolvers, Services and Input models, Args models - grouped by type
 
 ## Script types
 - `<Type>Resolver` - Resolver (GraphQL resolver can be compared with REST API controller)
@@ -33,6 +33,7 @@ npm i & docker-compose up -d
 - [GrapQL Joga](https://github.com/prisma/graphql-yoga) - Provide GraphQL server (express + apollo), GraphQL tools, GraphQL subscriptions and GraphQL playground
 - [TypeGraphQL](https://typegraphql.ml/) - Layer for generation GraphQL schema from TypeScript
 - [Type ORM](https://typeorm.io) - Database layer (supports MySQL, MariaDB, PostgreSQL, CockroachDB, SQLite, MSSQL, Oracle and MongoDB)
+- [Apollo Errors](https://github.com/boltsource/apollo-errors) - Provides better error handling / custom machine-readable errors
 - [Class Validator](https://github.com/typestack/class-validator) - Provides decorators for validating class properties
 - [TS Node](https://github.com/TypeStrong/ts-node) - TypeScript executor for Node
 - [EsLint](https://eslint.org/) - Checking/Fixing code quality/standard tool
@@ -46,5 +47,3 @@ Mocha or https://github.com/alsatian-test/alsatian
 ## TODO
 - Add middleware for showing validation errors
 - Add unit tests
-- Add Context with userCode from header
-- Add endpoint requiring memberCode (auth)

@@ -1,7 +1,7 @@
 {
-  "name": "hunting-graphql",
+  "name": "graphql-api-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "GraphQl API template for fast setup with best libraries for great developer experience",
   "main": "index.js",
   "scripts": {
     "serve": "nodemon",
@@ -9,7 +9,7 @@
     "lint": "eslint --fix src/**/*.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Martin Štěpánek",
   "license": "ISC",
   "dependencies": {
     "@types/graphql": "^14.5.0",
