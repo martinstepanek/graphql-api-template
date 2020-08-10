@@ -6,7 +6,7 @@ export const contextFactory = async ({ req }): Promise<Context> => {
     
     const accessToken = req.header('Access-Token');
     if (!accessToken) {
-        return { user: null };
+        return { user: null, req };
     }
 
     const userRepository = TypeORM.getCustomRepository(UserRepository);
@@ -16,5 +16,5 @@ export const contextFactory = async ({ req }): Promise<Context> => {
         },
     });
 
-    return { user };
+    return { user, req };
 };

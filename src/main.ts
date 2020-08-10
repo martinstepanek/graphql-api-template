@@ -9,6 +9,15 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { register as registerPrometheusClient } from 'prom-client';
 import createMetricsPlugin from 'apollo-metrics';
+import * as Sentry from '@sentry/node';
+import config from './config';
+import { apolloServerSentryPlugin } from './bootstrap/apolloServerSentryPlugin';
+
+// Init sentry
+Sentry.init({
+    dsn: config.sentryDns,
+});
+
 
 /**
  * Bootstrapping function
@@ -30,6 +39,8 @@ async function bootstrap(): Promise<void> {
     // Express app
     const app = express();
 
+    app.use(Sentry.Handlers.requestHandler());
+
     // Setup /metrics endpoint for prometheus
     app.get('/metrics', (_, res) => res.send(registerPrometheusClient.metrics()));
     const apolloMetricsPlugin = createMetricsPlugin(registerPrometheusClient);
@@ -40,7 +51,7 @@ async function bootstrap(): Promise<void> {
         context: contextFactory,
         formatError: errorFormatter,
         // @ts-ignore
-        plugins: [apolloMetricsPlugin],
+        plugins: [apolloMetricsPlugin, apolloServerSentryPlugin],
         tracing: true,
     });
 

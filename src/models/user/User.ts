@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from 'type-graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { UserState } from './UserState';
+import { UserSentryInformation } from './UserSentryInformation';
 
 @Entity()
 @ObjectType()
@@ -33,4 +34,8 @@ export class User {
 
     @Column('datetime', { default: () => 'CURRENT_TIMESTAMP' })
     public updatedAt: Date;
+
+    public getSentryInformation(): UserSentryInformation {
+        return new UserSentryInformation(this.userId, this.email);
+    }
 }
