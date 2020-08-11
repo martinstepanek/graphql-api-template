@@ -38,8 +38,8 @@ async function bootstrap(): Promise<void> {
 
     app.use(Sentry.Handlers.requestHandler());
 
-    // Setup /metrics endpoint for prometheus
-    app.get('/metrics', (_, res) => res.send(registerPrometheusClient.metrics()));
+    // Setup /graphql/metrics endpoint for prometheus
+    app.get('/graphql/metrics', (_, res) => res.send(registerPrometheusClient.metrics()));
     const apolloMetricsPlugin = createMetricsPlugin(registerPrometheusClient);
 
     // Apollo server
