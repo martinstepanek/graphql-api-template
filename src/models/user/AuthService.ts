@@ -8,7 +8,7 @@ export class AuthService {
     private googleAuthClient: OAuth2Client;
 
     public constructor() {
-        this.googleAuthClient = new OAuth2Client(config.googleClientId);
+        this.googleAuthClient = new OAuth2Client(config.google.clientId);
     }
 
     public async verifyTokenId(tokenId: string): Promise<TokenPayload> {

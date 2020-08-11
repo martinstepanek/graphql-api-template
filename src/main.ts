@@ -14,10 +14,7 @@ import config from './config';
 import { apolloServerSentryPlugin } from './bootstrap/apolloServerSentryPlugin';
 
 // Init sentry
-Sentry.init({
-    dsn: config.sentryDns,
-});
-
+Sentry.init({ ...config.sentry });
 
 /**
  * Bootstrapping function
