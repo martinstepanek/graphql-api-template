@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from 'type-graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { UserState } from './UserState';
-import {UserSentryInformation} from './UserSentryInformation';
+import { UserSentryInformation} from './UserSentryInformation';
 
 @Entity()
 @ObjectType()

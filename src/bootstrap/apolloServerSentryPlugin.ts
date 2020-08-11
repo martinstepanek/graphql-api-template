@@ -16,7 +16,6 @@ export const apolloServerSentryPlugin: ApolloServerPlugin = {
                     if (Boolean(context.user)) {
                         scope.setUser({
                             //id: context.user.id,
-                            // eslint-disable-next-line @typescript-eslint/camelcase
                             ip_address: context.req?.ip,
                             user: context.user.getSentryInformation(),
                         });
