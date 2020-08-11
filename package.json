@@ -1,64 +1,77 @@
 {
-  "name": "graphql-api-template",
-  "version": "1.0.0",
-  "description": "GraphQl API template for fast setup with best libraries for great developer experience",
-  "main": "index.js",
-  "scripts": {
-    "serve": "nodemon",
-    "migration": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js",
-    "lint": "eslint --fix src/**/*.ts"
-  },
-  "keywords": [],
-  "author": "Martin Štěpánek",
-  "license": "ISC",
-  "dependencies": {
-    "@sentry/node": "^5.20.1",
-    "@types/graphql": "^14.5.0",
-    "apollo-metrics": "^1.0.1",
-    "apollo-server-express": "^2.16.1",
-    "bufferutil": "^4.0.1",
-    "class-validator": "^0.9.1",
-    "google-auth-library": "^6.0.6",
-    "graphql": "^14.7.0",
-    "mysql": "^2.18.1",
-    "nodemon": "^2.0.4",
-    "prom-client": "^12.0.0",
-    "reflect-metadata": "^0.1.13",
-    "ts-node": "^8.10.2",
-    "type-graphql": "^0.17.6",
-    "typedi": "^0.8.0",
-    "typeorm": "^0.2.25",
-    "utf-8-validate": "^5.0.2"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-conventional": "^9.1.1",
-    "@types/node": "^12.12.54",
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.13.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "husky": "^4.2.5",
-    "prettier": "^1.19.1",
-    "typeorm-typedi-extensions": "^0.2.3",
-    "typescript": "^3.9.7"
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 4,
-    "semi": true,
-    "printWidth": 120,
-    "singleQuote": true
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    "name": "graphql-api-template",
+    "version": "1.0.0",
+    "description": "GraphQl API template for fast setup with best libraries for great developer experience",
+    "main": "index.js",
+    "scripts": {
+        "serve": "nodemon",
+        "migration": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js",
+        "lint": "eslint --fix src/**/*.ts"
+    },
+    "keywords": [],
+    "author": "Martin Štěpánek",
+    "license": "ISC",
+    "dependencies": {
+        "@sentry/node": "^5.20.1",
+        "@types/graphql": "^14.5.0",
+        "apollo-metrics": "^1.0.1",
+        "apollo-server-express": "^2.16.1",
+        "bufferutil": "^4.0.1",
+        "class-validator": "^0.9.1",
+        "google-auth-library": "^6.0.6",
+        "graphql": "^14.7.0",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.4",
+        "prom-client": "^12.0.0",
+        "reflect-metadata": "^0.1.13",
+        "ts-node": "^8.10.2",
+        "type-graphql": "^0.17.6",
+        "typedi": "^0.8.0",
+        "typeorm": "^0.2.25",
+        "utf-8-validate": "^5.0.2"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^9.1.2",
+        "@commitlint/config-conventional": "^9.1.1",
+        "@types/node": "^12.12.54",
+        "@typescript-eslint/eslint-plugin": "^1.13.0",
+        "@typescript-eslint/parser": "^1.13.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.11",
+        "prettier": "^1.19.1",
+        "typeorm-typedi-extensions": "^0.2.3",
+        "typescript": "^3.9.7"
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": true,
+        "printWidth": 120,
+        "singleQuote": true
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "lint-staged": {
+        "*.{ts}": [
+            "eslint --fix",
+            "prettier --write",
+            "git add"
+        ],
+        "*.{json,md}": [
+            "prettier --write",
+            "git add"
+        ]
     }
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  }
 }
