@@ -34,8 +34,9 @@ export const apolloServerSentryPlugin: ApolloServerPlugin = {
                             });
                             Sentry.captureException(error);
                         } else {
-                            scope.setExtras({});
-                            Sentry.captureMessage(`GraphQLWrongQuery: ${error.message}`);
+                            // We dont want to report wrong graphql queries
+                            // scope.setExtras({});
+                            // Sentry.captureMessage(`GraphQLWrongQuery: ${error.message}`);
                         }
                     });
                 });
