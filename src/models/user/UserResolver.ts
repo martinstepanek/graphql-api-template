@@ -5,7 +5,6 @@ import { UserRepository } from './UserRepository';
 import { User } from './User';
 import { AuthService } from './AuthService';
 import { UserInput } from './UserInput';
-import { NotFoundError } from '../../errors/NotFoundError';
 
 @Resolver(User)
 export class UserResolver {
@@ -15,11 +14,11 @@ export class UserResolver {
     ) {}
 
     @Authorized()
-    @Query(() => User, { description: 'Get user by id' })
+    @Query(() => User, { description: 'Get user by id', nullable: true })
     public async user(@Arg('userId') userId: string): Promise<User> {
         const model = await this.userRepository.findOne(userId);
         if (model === undefined) {
-            throw new NotFoundError();
+            return null;
         }
         return model;
     }
