@@ -31,12 +31,15 @@
     "utf-8-validate": "^5.0.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.1",
     "@types/node": "^12.12.54",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
     "prettier": "^1.19.1",
     "typeorm-typedi-extensions": "^0.2.3",
     "typescript": "^3.9.7"
@@ -47,5 +50,15 @@
     "semi": true,
     "printWidth": 120,
     "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
