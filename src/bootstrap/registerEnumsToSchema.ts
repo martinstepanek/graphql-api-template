@@ -1,7 +1,8 @@
-// import { registerEnumType } from 'type-graphql';
+import { OrderType } from '../models/common/pagination/OrderType';
+import { registerEnumType } from 'type-graphql';
 
 export const registerEnumsToSchema = () => {
-    // registerEnumType(EnumName, {
-    //     name: 'EnumName',
-    // });
+    registerEnumType(OrderType, {
+        name: 'OrderType',
+    });
 };

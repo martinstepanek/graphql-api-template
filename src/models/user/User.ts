@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Authorized, Field, ID, ObjectType } from 'type-graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { UserState } from './UserState';
 import { UserSentryInformation } from './UserSentryInformation';
@@ -23,7 +23,8 @@ export class User {
     public picture: string;
 
     @Column()
-    @Field()
+    @Field({ nullable: true })
+    @Authorized()
     public accessToken: string;
 
     @Column({ type: 'enum', enum: UserState, default: UserState.Created })
