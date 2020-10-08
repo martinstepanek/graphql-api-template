@@ -13,12 +13,12 @@ export const apolloServerSentryPlugin: ApolloServerPlugin = {
 
                     scope.addEventProcessor(event => Sentry.Handlers.parseRequest(event, context.req));
 
-                    if (Boolean(context.user)) {
+                    if (context.userIdentity.isLoggedIn) {
                         scope.setUser({
                             //id: context.user.id,
                             // eslint-disable-next-line @typescript-eslint/camelcase
                             ip_address: context.req?.ip,
-                            user: context.user.getSentryInformation(),
+                            user: context.userIdentity.user.getSentryInformation(),
                         });
                     }
 

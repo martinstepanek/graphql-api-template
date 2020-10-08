@@ -1,7 +1,8 @@
-import { User } from './user/User';
 import { Request } from 'express';
+import { UserIdentity } from './user/UserIdentity';
 
 export class Context {
-    public user: User;
+    public userIdentity: UserIdentity;
     public req: Request;
+    public requestId: number;
 }

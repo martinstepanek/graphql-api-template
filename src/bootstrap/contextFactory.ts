@@ -2,20 +2,34 @@ import { Context } from '../models/Context';
 import * as TypeORM from 'typeorm';
 import { UserRepository } from '../models/user/UserRepository';
 import { ExpressContext } from 'apollo-server-express/src/ApolloServer';
+import { UserIdentity } from '../models/user/UserIdentity';
+import { Container } from 'typedi';
 
-export const contextFactory = async ({ req }: ExpressContext): Promise<Context> => {
-    
-    const accessToken = req.header('Access-Token');
-    if (!accessToken) {
-        return { user: null, req };
+export const contextFactory = async ({ req, connection }: ExpressContext): Promise<Context> => {
+    const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+
+    const accessToken = connection
+        ? connection.context['Access-Token']
+        : req.header('Access-Token')?.replace('Bearer ', '');
+
+    const userIdentity = new UserIdentity();
+    const context: Context = {
+        userIdentity,
+        req,
+        requestId,
+    };
+
+    if (accessToken) {
+        const userRepository = TypeORM.getCustomRepository(UserRepository);
+        const user = await userRepository.findOne({
+            where: {
+                accessToken,
+            },
+        });
+        context.userIdentity.user = user;
     }
+    Container.of(requestId).set('Context', context);
+    Container.set('Context', context);
 
-    const userRepository = TypeORM.getCustomRepository(UserRepository);
-    const user = await userRepository.findOne({
-        where: {
-            accessToken,
-        },
-    });
-
-    return { user, req };
+    return context;
 };
