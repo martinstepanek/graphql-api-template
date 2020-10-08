@@ -1,10 +1,10 @@
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { Inject } from 'typedi';
-import { UserRepository } from './UserRepository';
-import { User } from './User';
-import { AuthService } from './AuthService';
-import { UserInput } from './UserInput';
+import { UserRepository } from '../models/user/UserRepository';
+import { User } from '../models/user/User';
+import { AuthService } from '../models/user/AuthService';
+import { UserInput } from '../models/user/UserInput';
 
 @Resolver(User)
 export class UserResolver {
@@ -25,9 +25,9 @@ export class UserResolver {
 
     @Mutation(() => User, { description: 'Login/Register new user' })
     public async login(@Arg('user') userInput: UserInput): Promise<User> {
-        let token = await this.authService.verifyTokenId(userInput.tokenId);
+        const token = await this.authService.verifyTokenId(userInput.tokenId);
 
-        let user = await this.userRepository.findOne({
+        const user = await this.userRepository.findOne({
             where: {
                 email: token.email,
             },
@@ -37,7 +37,7 @@ export class UserResolver {
             return user;
         }
 
-        let newUser = this.userRepository.create();
+        const newUser = this.userRepository.create();
         newUser.name = token.name;
         newUser.email = token.email;
         newUser.picture = token.picture;

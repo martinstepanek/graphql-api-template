@@ -1,7 +1,7 @@
 import { buildSchema } from 'type-graphql';
 import { Container } from 'typedi';
 import * as TypeORM from 'typeorm';
-import { UserResolver } from './models/user/UserResolver';
+import { UserResolver } from './resolvers';
 import { contextFactory } from './bootstrap/contextFactory';
 import { authChecker } from './bootstrap/authChecker';
 import { errorFormatter } from './bootstrap/errorFormatter';
