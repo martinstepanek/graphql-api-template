@@ -1,9 +1,18 @@
 ## Serve API
 
+-   Create `ormconfig.json` based on `ormconfig.json.env` and `src/config.ts` on `src/config.ts.env`
+
 ```
 $ npm i
 $ docker-compose up -d
 ```
+
+####[GraphQL operations you can try](OPERATIONS.md)
+
+## URIs
+
+-   GraphQL & GraphQL Playground http://localhost:4000/graphql
+-   GraphQL metrics http://localhost:4000/graphql
 
 ## Commands
 
@@ -41,6 +50,7 @@ $ docker-compose up -d
 -   [Type ORM](https://typeorm.io) - Database layer (supports MySQL, MariaDB, PostgreSQL, CockroachDB, SQLite, MSSQL, Oracle and MongoDB)
 -   [DataLoader](https://github.com/graphql/dataloader) - Batching/Caching data layer
 -   [Class Validator](https://github.com/typestack/class-validator) - Provides decorators for validating class properties
+-   [Apollo Metrics](https://www.npmjs.com/package/apollo-metrics) - Plugin to export basic GraphQL metrics
 -   [TS Node](https://github.com/TypeStrong/ts-node) - TypeScript executor for Node
 -   [EsLint](https://eslint.org/) - Checking/Fixing code quality/standard tool
 
