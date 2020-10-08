@@ -9,7 +9,7 @@ export class PaginationInput {
     @Max(50)
     public first: number = 10;
 
-    @Field({ nullable: true, description: 'Show items after cursor'})
+    @Field({ nullable: true, description: 'Show items after cursor' })
     public after: string;
 
     @Field(() => OrderType, { defaultValue: OrderType.ASC })
