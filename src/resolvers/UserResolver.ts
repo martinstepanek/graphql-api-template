@@ -5,6 +5,8 @@ import { UserRepository } from '../models/user/UserRepository';
 import { User } from '../models/user/User';
 import { AuthService } from '../models/user/AuthService';
 import { UserInput } from '../models/user/UserInput';
+import { RequestContainer } from '../decorators/RequestContainer';
+import { UserLoader } from '../models/user/UserLoader';
 
 @Resolver(User)
 export class UserResolver {
@@ -15,8 +17,11 @@ export class UserResolver {
 
     @Authorized()
     @Query(() => User, { description: 'Get user by id', nullable: true })
-    public async user(@Arg('userId') userId: string): Promise<User> {
-        const model = await this.userRepository.findOne(userId);
+    public async user(
+        @Arg('userId') userId: string,
+        @RequestContainer() userLoader: UserLoader,
+    ): Promise<User> {
+        const model = await userLoader.load(userId);
         if (model === undefined) {
             return null;
         }

@@ -21,12 +21,11 @@ export const contextFactory = async ({ req, connection }: ExpressContext): Promi
 
     if (accessToken) {
         const userRepository = TypeORM.getCustomRepository(UserRepository);
-        const user = await userRepository.findOne({
+        context.userIdentity.user = await userRepository.findOne({
             where: {
                 accessToken,
             },
         });
-        context.userIdentity.user = user;
     }
     Container.of(requestId).set('Context', context);
     Container.set('Context', context);

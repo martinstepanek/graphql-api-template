@@ -11,7 +11,7 @@ import { register as registerPrometheusClient } from 'prom-client';
 import createMetricsPlugin from 'apollo-metrics';
 import * as Sentry from '@sentry/node';
 import config from './config';
-import { apolloServerSentryPlugin } from './bootstrap/apolloServerSentryPlugin';
+import { apolloClearContainerPlugin, apolloServerSentryPlugin } from './bootstrap/apollo-plugins';
 import { registerEnumsToSchema } from './bootstrap/registerEnumsToSchema';
 
 // Init sentry
@@ -56,9 +56,9 @@ async function bootstrap(): Promise<void> {
         debug: isEnvDev,
         introspection: isEnvDev,
         playground: isEnvDev,
-        
+
         // @ts-ignore
-        plugins: [apolloMetricsPlugin, apolloServerSentryPlugin],
+        plugins: [apolloMetricsPlugin, apolloServerSentryPlugin, apolloClearContainerPlugin],
         tracing: true,
     });
 
