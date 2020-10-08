@@ -4,7 +4,7 @@
 
 ```
 $ npm i
-$ docker-compose up -d
+$ docker-compose up
 ```
 
 #### [GraphQL operations you can try](docs/OPERATIONS.md)
