@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/node';
-import { Context } from '../models/Context';
+import { Context } from '../../models/Context';
 import { ApolloServerPlugin } from 'apollo-server-plugin-base';
 
 // @see https://gist.github.com/nodkz/d14b236d67251d2df5674cb446843732
