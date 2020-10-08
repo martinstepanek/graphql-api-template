@@ -12,6 +12,7 @@ import createMetricsPlugin from 'apollo-metrics';
 import * as Sentry from '@sentry/node';
 import config from './config';
 import { apolloServerSentryPlugin } from './bootstrap/apolloServerSentryPlugin';
+import { registerEnumsToSchema } from './bootstrap/registerEnumsToSchema';
 
 // Init sentry
 Sentry.init({ ...config.sentry, environment: config.environment });
@@ -25,6 +26,9 @@ async function bootstrap(): Promise<void> {
 
     // Database connection
     await TypeORM.createConnection();
+
+    // Registers enums to schema
+    registerEnumsToSchema();
 
     // Building scheme with type-graphql
     const schema = await buildSchema({
@@ -42,11 +46,17 @@ async function bootstrap(): Promise<void> {
     app.get('/graphql/metrics', (_, res) => res.send(registerPrometheusClient.metrics()));
     const apolloMetricsPlugin = createMetricsPlugin(registerPrometheusClient);
 
+    const isEnvDev = config.environment === 'dev';
+
     // Apollo server
     const server = new ApolloServer({
         schema,
         context: contextFactory,
         formatError: errorFormatter,
+        debug: isEnvDev,
+        introspection: isEnvDev,
+        playground: isEnvDev,
+        
         // @ts-ignore
         plugins: [apolloMetricsPlugin, apolloServerSentryPlugin],
         tracing: true,
