@@ -12,7 +12,7 @@ $ docker-compose up
 ## URIs
 
 -   GraphQL & GraphQL Playground http://localhost:4000/graphql
--   GraphQL metrics http://localhost:4000/graphql
+-   GraphQL metrics http://localhost:4000/graphql/metrics
 
 ## Commands
 
