@@ -9,24 +9,32 @@ services:
         volumes:
             - ./:/app
         command: 'npm run serve'
+        networks:
+            - net
     mysql:
-        image: mysql:8.0
-        restart: unless-stopped
+        image: mysql:5.7
         volumes:
-            - mysql:/var/lib/mysql
+            - ./docker/data:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
+        networks:
+            - net
     pma:
         image: phpmyadmin/phpmyadmin
         environment:
             PMA_ARBITRARY: 1
         ports:
             - 8080:80
+        networks:
+            - net
     adminer:
         image: adminer
         restart: unless-stopped
         ports:
             - 8090:8080
-volumes:
-    mysql: ~
+        networks:
+            - net
+networks:
+    net:
+        driver: bridge
 # docker-compose exec api /bin/bash
