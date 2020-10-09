@@ -98,17 +98,4 @@ export class UserResolver {
         const userEntity = await userLoader.load(user.userId);
         return userEntity.picture;
     }
-
-    @FieldResolver(() => String)
-    public async accessToken(
-        @Root() user: User,
-        @Ctx() context: Context,
-        @RequestContainer() userLoader: UserLoader
-    ): Promise<string> {
-        const userEntity = await userLoader.load(user.userId);
-        if (!context.userIdentity.isItMe(userEntity)) {
-            return null;
-        }
-        return userEntity.accessToken;
-    }
 }
