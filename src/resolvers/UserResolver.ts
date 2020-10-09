@@ -1,4 +1,4 @@
-import { Arg, Args, Authorized, Ctx, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
+import { Arg, Args, Authorized, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { Inject } from 'typedi';
 import { UserRepository } from '../models/user/UserRepository';
@@ -11,7 +11,6 @@ import { UserConnection } from '../models/user/UserConnection';
 import { ActiveDataProvider } from '../models/common/pagination/ActiveDataProvider';
 import { UserConnectionArgs } from '../models/user/UserConnectionArgs';
 import { UserEdge } from '../models/user/UserEdge';
-import { Context } from '../models/Context';
 
 @Resolver(User)
 export class UserResolver {
