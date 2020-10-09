@@ -56,7 +56,7 @@ export class ActiveDataProvider<TEntity> {
         return entities.map(entity => entity[this.options.primaryColumn].toString());
     }
 
-    public async geTotalCount(): Promise<number> {
+    public async getTotalCount(): Promise<number> {
         if (this.options.where) {
             return this.options.repository.count({ where: this.options.where });
         }

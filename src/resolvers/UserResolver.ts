@@ -38,9 +38,7 @@ export class UserResolver {
         newUser.email = token.email;
         newUser.picture = token.picture;
         newUser.accessToken = this.authService.generateAccessToken();
-        await this.userRepository.save(newUser);
-
-        return this.userRepository.findOne(newUser.userId);
+        return await this.userRepository.save(newUser);
     }
 
     @Authorized()
@@ -75,7 +73,7 @@ export class UserResolver {
         );
 
         return {
-            totalCount: await activeDataProvider.geTotalCount(),
+            totalCount: await activeDataProvider.getTotalCount(),
             edges: edges,
         };
     }

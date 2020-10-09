@@ -8,9 +8,10 @@ import { Container } from 'typedi';
 export const contextFactory = async ({ req, connection }: ExpressContext): Promise<Context> => {
     const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
-    const accessToken = connection
-        ? connection.context['Access-Token']
-        : req.header('Access-Token')?.replace('Bearer ', '');
+    const accessToken = (connection ? connection.context['Access-Token'] : req.header('Access-Token'))?.replace(
+        'Bearer ',
+        ''
+    );
 
     const userIdentity = new UserIdentity();
     const context: Context = {
@@ -28,7 +29,6 @@ export const contextFactory = async ({ req, connection }: ExpressContext): Promi
         });
     }
     Container.of(requestId).set('Context', context);
-    Container.set('Context', context);
 
     return context;
 };
