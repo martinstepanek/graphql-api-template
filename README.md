@@ -45,8 +45,8 @@ $ docker-compose up
 
 ## Important Libraries
 
--   [Apollo Server](https://github.com/apollographql/apollo-server) - GraphQl server
--   [TypeGraphQL](https://typegraphql.ml/) - Layer for generation GraphQL schema from TypeScript
+-   [Apollo Server](https://github.com/apollographql/apollo-server) - GraphQL server
+-   [TypeGraphQL](https://typegraphql.com/) - Layer for generation GraphQL schema from TypeScript
 -   [Type ORM](https://typeorm.io) - Database layer (supports MySQL, MariaDB, PostgreSQL, CockroachDB, SQLite, MSSQL, Oracle and MongoDB)
 -   [DataLoader](https://github.com/graphql/dataloader) - Batching/Caching data layer
 -   [Class Validator](https://github.com/typestack/class-validator) - Provides decorators for validating class properties
