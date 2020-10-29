@@ -3,7 +3,7 @@
 -   Create `ormconfig.json` based on `ormconfig.json.env` and `src/config.ts` on `src/config.ts.env`
 
 ```
-$ npm i
+$ docker-compose exec api npm i
 $ docker-compose up
 ```
 
